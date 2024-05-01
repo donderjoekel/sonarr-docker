@@ -8,5 +8,5 @@ on:
 
 jobs:
   call:
-    uses: tnrd-org/build-workflow/.github/workflows/build-on-call.yml@master
+    uses: donderjoekel/build-workflow/.github/workflows/build-on-call.yml@master
     secrets: inherit
