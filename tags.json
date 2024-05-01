@@ -12,15 +12,15 @@
     ]
   },
   "release": {
-    "description": "main/v4-stable",
+    "description": "mangarr/v0.1",
     "hide": false,
-    "last_updated": "2024-04-26T03:20:08.000Z",
-    "last_updated_url": "https://github.com/hotio/sonarr/actions/runs/8842556946",
+    "last_updated": "2024-05-01T11:17:54.000Z",
+    "last_updated_url": "https://github.com/donderjoekel/sonarr-docker/actions/runs/8908649282",
     "latest": true,
     "tags": [
       "release",
-      "release-4.0.4.1491",
-      "release-eea8743"
+      "release-0.1.0.807",
+      "release-7543f41"
     ]
   }
 }
