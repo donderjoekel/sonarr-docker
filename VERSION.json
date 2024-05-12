@@ -1,6 +1,6 @@
 {
-  "amd64_url": "https://github.com/tnrd-org/Sonarr/releases/download/v0.1.0.821/Sonarr.mangarr.0.1.0.821.linux-musl-x64.tar.gz",
-  "arm64_url": "https://github.com/tnrd-org/Sonarr/releases/download/v0.1.0.821/Sonarr.mangarr.0.1.0.821.linux-musl-arm64.tar.gz",
+  "amd64_url": "https://github.com/donderjoekel/Sonarr/releases/download/v0.1.0.821/Sonarr.mangarr.0.1.0.821.linux-musl-x64.tar.gz",
+  "arm64_url": "https://github.com/donderjoekel/Sonarr/releases/download/v0.1.0.821/Sonarr.mangarr.0.1.0.821.linux-musl-arm64.tar.gz",
   "description": "mangarr/v0.1",
   "latest": true,
   "sbranch": "mangarr",
