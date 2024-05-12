@@ -14,13 +14,13 @@
   "release": {
     "description": "mangarr/v0.1",
     "hide": false,
-    "last_updated": "2024-05-12T17:31:03.000Z",
-    "last_updated_url": "https://github.com/donderjoekel/sonarr-docker/actions/runs/9053088406",
+    "last_updated": "2024-05-12T17:31:31.000Z",
+    "last_updated_url": "https://github.com/donderjoekel/sonarr-docker/actions/runs/9053090088",
     "latest": true,
     "tags": [
       "release",
       "release-0.1.0.821",
-      "release-6445915"
+      "release-c8885d1"
     ]
   }
 }
