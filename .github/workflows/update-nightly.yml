@@ -53,6 +53,29 @@ jobs:
             echo "$key=${!key}"
           done
 
+      - name: Update VERSION.json
+        run: |
+            linux_musl_x64_url="${{ env.linux_musl_x64_download_url }}"
+            linux_musl_arm64_url="${{ env.linux_musl_arm64_download_url }}"
+            version="${{ env.pre_release_name }}"
+  
+            # Load the VERSION.json file
+            version_json=$(cat VERSION.json)
+  
+            # Update the properties in VERSION.json
+            updated_version_json=$(echo "$version_json" | jq \
+              --arg linux_musl_x64_url "$linux_musl_x64_url" \
+              --arg linux_musl_arm64_url "$linux_musl_arm64_url" \
+              --arg version "$version" \
+              '.amd64_url = $linux_musl_x64_url | .arm64_url = $linux_musl_arm64_url | .version = $version')
+  
+            # Save the updated JSON back to VERSION.json
+            echo "$updated_version_json" > VERSION.json
+  
+      - name: Output Updated VERSION.json
+        run: |
+            cat VERSION.json
+
       - name: Use Pre-Release Info in Next Step
         run: |
           echo "Using the latest pre-release info in the next step..."
