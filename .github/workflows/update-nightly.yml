@@ -42,17 +42,6 @@ jobs:
             fi
           done
 
-      - name: Output Latest Pre-Release Info
-        run: |
-          echo "Latest Pre-Release Tag: ${{ env.pre_release_tag }}"
-          echo "Latest Pre-Release Name: ${{ env.pre_release_name }}"
-          echo "Latest Pre-Release URL: ${{ env.pre_release_url }}"
-
-          # Output extracted download URLs
-          for key in $(env | grep '_download_url' | cut -d= -f1); do
-            echo "$key=${!key}"
-          done
-
       - name: Update VERSION.json
         run: |
             linux_musl_x64_url="${{ env.linux_musl_x64_download_url }}"
@@ -72,16 +61,12 @@ jobs:
             # Save the updated JSON back to VERSION.json
             echo "$updated_version_json" > VERSION.json
   
-      - name: Output Updated VERSION.json
+      - name: Commit and Push Changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-            cat VERSION.json
-
-      - name: Use Pre-Release Info in Next Step
-        run: |
-          echo "Using the latest pre-release info in the next step..."
-          # Example of using the extracted variables
-          echo "The latest pre-release is ${{ env.pre_release_name }} (${{ env.pre_release_tag }}), and can be found at ${{ env.pre_release_url }}"
-          # Output extracted download URLs
-          for key in $(env | grep '_download_url' | cut -d= -f1); do
-            echo "$key=${!key}"
-          done
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add VERSION.json
+          git commit -m "Update VERSION.json"
+          git push origin HEAD:${{ github.ref }}
