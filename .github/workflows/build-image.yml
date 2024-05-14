@@ -4,13 +4,15 @@ on:
   workflow_dispatch:
 
 jobs:
-  get-releases:
+  update-version:
     runs-on: ubuntu-latest
+    outputs:
+      status: ${{ steps.status.outputs.value }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Run Bash Script to Get Pre-Releases
+      - name: Run Bash Script to Get Releases
         id: get_releases
         run: |
           TOKEN=${{ secrets.GITHUB_TOKEN }}
@@ -62,11 +64,23 @@ jobs:
             echo "$updated_version_json" > VERSION.json
   
       - name: Commit and Push Changes
+        id: status
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add VERSION.json
-          git commit -m "Update VERSION.json"
-          git push origin HEAD:${{ github.ref }}
+          if git commit -m "Update VERSION.json"; then
+            git push origin HEAD:${{ github.ref }}
+            echo "value=true" >> $GITHUB_OUTPUT
+          else
+            echo "No changes to commit"
+            echo "value=false" >> $GITHUB_OUTPUT
+          fi
+
+  call:
+    needs: [update-version]
+    if: needs.update-version.outputs.status == 'true'
+    uses: donderjoekel/build-workflow/.github/workflows/build-on-call.yml@master
+    secrets: inherit
