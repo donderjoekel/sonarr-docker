@@ -3,7 +3,7 @@ name: build image
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "0/15 * * * *"
 
 jobs:
   get-releases:
